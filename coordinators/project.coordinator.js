@@ -8,7 +8,7 @@ const nanoid = customAlphabet('1234567890abcdef', 10)
 
 const ajv = new Ajv();
 addFormats(ajv);
-const validate = ajv.compile(ProjectSchemaSchema);
+const validate = ajv.compile(ProjectSchema);
 
 
 export default class WidgetsCoordinator {
