@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "http://myapplication/widget.json",
+    "$id": "http://myapplication/project.json",
     "title": "Project",
     "description": "A project",
     "type": "object",
