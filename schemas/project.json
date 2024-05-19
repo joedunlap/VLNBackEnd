@@ -1,0 +1,44 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://myapplication/widget.json",
+    "title": "Project",
+    "description": "A project",
+    "type": "object",
+    "required": ["id", "name"],
+    "properties": {
+      "id": {
+        "description": "The unique id for this project in NANOID format",
+        "type": "string",
+        "format": "nanoid"
+      },
+      "name": {
+        "description": "The name of this project",
+        "type": "string",
+        "minLength": 3
+      },
+      "briefdescription": {
+        "description": "brief description of this project",
+        "type": "string"
+      },
+      
+    
+      "tags": {
+        "description": "Tags for this project for searching and categorization",
+        "type": "array"
+      },
+      "tracking": {
+        "type": "object",
+        "properties": {
+          "lastUpdated": {
+            "description": "The date this project was last updated",
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastUpdatedBy": {
+            "description": "The userID that last updated this project",
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
