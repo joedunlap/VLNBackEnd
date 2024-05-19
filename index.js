@@ -3,6 +3,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import errorMiddleware from './middleware/errorHandler.js';
 import projectRouter from './routes/project.routes.js';
+import sampleRouter from './routes/sample.routes.js';
 import { db } from './lib/database.js';
 
 const { json } = bodyParser;

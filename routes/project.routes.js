@@ -7,6 +7,7 @@ import {
   deleteProject,
   updateProject,
 } from '../controllers/project.controller.js';
+import sampleRoutes from './sample.routes.js';
 
 const projectRouter = express.Router();
 
@@ -29,5 +30,7 @@ projectRouter.delete('/:id', deleteProject);
 
 // PATCH /api/v1/projects/<id>
 projectRouter.patch('/:id', updateProject);
+
+projectRouter.use('/:projectId/samples', sampleRoutes);
 
 export default projectRouter;
