@@ -11,7 +11,7 @@ addFormats(ajv);
 const validate = ajv.compile(ProjectSchema);
 
 
-export default class WidgetsCoordinator {
+export default class ProjectsCoordinator {
  
   static getProjects = () => {
     console.log('\t Coordinator : getWidgets()');
