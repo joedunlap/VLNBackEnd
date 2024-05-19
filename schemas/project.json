@@ -9,7 +9,7 @@
       "id": {
         "description": "The unique id for this project in NANOID format",
         "type": "string",
-        "format": "nanoid"
+        "format": "uuid"
       },
       "name": {
         "description": "The name of this project",

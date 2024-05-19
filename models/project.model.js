@@ -3,14 +3,6 @@
 import { db } from '../lib/database.js';
 import Constants from '../lib/constants.js';
 
-let projects = [
-  {
-    id: '1',
-    name: 'Project #1',
-    color: 'blue',
-  },
-];
-
 export default class ProjectsModel {
   static getProjects = async () => {
     console.log('\t\t Model : getProjects()');

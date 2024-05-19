@@ -1,33 +1,29 @@
-import { customAlphabet } from 'nanoid'
+import { v4 as uuid } from 'uuid';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
-import ProjectsModel from '../models/project.model';
+import ProjectsModel from '../models/project.model.js';
 import ProjectSchema from '../schemas/project.json' assert { type: 'json' };
-
-const nanoid = customAlphabet('1234567890abcdef', 10)
 
 const ajv = new Ajv();
 addFormats(ajv);
 const validate = ajv.compile(ProjectSchema);
 
-
 export default class ProjectsCoordinator {
- 
   static getProjects = () => {
-    console.log('\t Coordinator : getWidgets()');
+    console.log('\t Coordinator : getProjects()');
     return ProjectsModel.getProjects();
   };
 
   static createProject = (newProject) => {
     console.log('\t Coordinator : createProject()');
 
-    const widget = {
+    const project = {
       ...newProject,
-      id: nanoid(),
-      createdAt: new Date()
+      id: uuid(),
+      createdAt: new Date(),
     };
 
-    const valid = validate(Project);
+    const valid = validate(project);
     if (!valid) {
       throw validate.errors;
     }
@@ -36,23 +32,23 @@ export default class ProjectsCoordinator {
   };
 
   static getProject = (id) => {
-    console.log('\t Coordinator : getProject()');
+    console.log(`\t Coordinator : getProject(${id})`);
     return ProjectsModel.getProject(id);
   };
 
   static deleteProject = (id) => {
-    console.log('\t Coordinator : deleteProject()');
+    console.log(`\t Coordinator : deleteProject(${id})`);
     return ProjectsModel.deleteProject(id);
   };
 
   static replaceProject = (id, project) => {
-    console.log('\t Coordinator : replaceProject()');
+    console.log(`\t Coordinator : replaceProject(${id})`);
     const replaceProject = {
       ...project,
       id,
     };
 
-    const valid = validate(project);
+    const valid = validate(replaceProject);
     if (!valid) {
       throw validate.errors;
     }
@@ -61,7 +57,7 @@ export default class ProjectsCoordinator {
   };
 
   static updateProject = (id, project) => {
-    console.log('\t Coordinator : updateProject()');
+    console.log(`\t Coordinator : updateProject(${id})`);
 
     const valid = validate(project);
     if (!valid) {
@@ -70,5 +66,4 @@ export default class ProjectsCoordinator {
 
     return ProjectsModel.updateProject(id, project);
   };
-
 }

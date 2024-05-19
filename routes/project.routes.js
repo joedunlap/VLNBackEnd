@@ -6,7 +6,7 @@ import {
   replaceProject,
   deleteProject,
   updateProject,
-} from '../controllers/project.controller';
+} from '../controllers/project.controller.js';
 
 const projectRouter = express.Router();
 
@@ -15,6 +15,8 @@ projectRouter.get('/', getProjects);
 
 // Post /api/v1/projects
 projectRouter.post('/', createProject);
+
+projectRouter.get('/projects/:id', getProject);
 
 // GET /api/v1/projects/<id>
 projectRouter.put('/:id', getProject);

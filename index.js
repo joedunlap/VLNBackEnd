@@ -26,6 +26,10 @@ app.use(errorMiddleware());
 const mongoConfig = config.get('mongo');
 db.init(mongoConfig);
 
+if (db.init(mongoConfig)) {
+    console.log('Succesfully connect to MongoDb Database')
+}
+
 app.listen(port, () => {
   console.log(`Starting express application on port ${port} @ ${new Date().toISOString()}`);
 });

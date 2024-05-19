@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import ProjectsCoordinator from '../coordinators/project.coordinator';
+import ProjectsCoordinator from '../coordinators/project.coordinator.js';
 
 export const getProjects = async (req, res, next) => {
   console.log('Controller : getProjects()');
