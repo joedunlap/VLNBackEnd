@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable import/extensions */
 import { db } from '../lib/database.js';
 import Constants from '../lib/constants.js';
