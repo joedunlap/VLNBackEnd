@@ -19,10 +19,10 @@ projectRouter.post('/', createProject);
 // GET /api/v1/projects/<id>
 projectRouter.put('/:id', getProject);
 
-// PUT /api/v1/widgets/<id>
+// PUT /api/v1/projects/<id>
 projectRouter.put('/:id', replaceProject);
 
-// DELETE /api/v1/widgets/<id>
+// DELETE /api/v1/projects/<id>
 projectRouter.delete('/:id', deleteProject);
 
 // PATCH /api/v1/projects/<id>
