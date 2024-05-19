@@ -19,7 +19,7 @@ projectRouter.post('/', createProject);
 projectRouter.get('/projects/:id', getProject);
 
 // GET /api/v1/projects/<id>
-projectRouter.put('/:id', getProject);
+projectRouter.get('/:id', getProject);
 
 // PUT /api/v1/projects/<id>
 projectRouter.put('/:id', replaceProject);
