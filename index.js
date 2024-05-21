@@ -1,6 +1,7 @@
 import config from 'config';
 import express from 'express';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import errorMiddleware from './middleware/errorHandler.js';
 import projectRouter from './routes/project.routes.js';
 import sampleRouter from './routes/sample.routes.js';
@@ -12,7 +13,7 @@ const { json } = bodyParser;
 const app = express();
 const port = 3000;
 app.use(json());
-
+app.use(cors());
 // project routes
 app.post('/api/v1/projects');
 app.patch('/api/v1/projects/:id');
