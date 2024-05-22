@@ -63,6 +63,7 @@ export const updateSample = async (req, res, next) => {
   console.log(`Controller : updateSample(${req.params.id})`);
   try {
     const result = await SamplesCoordinator.updateSample(req.params.id, req.body);
+    console.log(result);
     if (result) {
       res.status(200).json(result);
     } else {

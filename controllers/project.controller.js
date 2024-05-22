@@ -70,6 +70,7 @@ export const updateProject = async (req, res, next) => {
 
   try {
     const result = await ProjectsCoordinator.updateProject(req.params.id, req.body);
+    console.log(result);
 
     if (result) {
       res.status(200).json(result);

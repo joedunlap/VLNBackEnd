@@ -57,9 +57,9 @@ export default class ProjectsModel {
       update.$set[key] = project[key];
     });
     const result = await db.dbProjects().findOneAndUpdate({ id }, update, { returnDocument: 'after' });
-    if (result.value) {
-      delete result.value._id; // eslint-disable-next-line no-underscore-dangle
-      return result.value;
+    if (result) {
+      delete result._id; // eslint-disable-next-line no-underscore-dangle
+      return result;
     }
     return false;
   }
