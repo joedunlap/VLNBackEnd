@@ -47,6 +47,7 @@ export const deleteSample = async (req, res, next) => {
 
 export const replaceSample = async (req, res, next) => {
   console.log(`Controller : replaceSample(${req.params.id})`);
+
   try {
     const result = await SamplesCoordinator.replaceSample(req.params.id, req.body);
     if (result) {
