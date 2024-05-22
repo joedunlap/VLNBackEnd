@@ -44,9 +44,9 @@ export default class SamplesModel {
       update.$set[key] = sample[key];
     });
     const result = await db.dbSamples().findOneAndUpdate({ id }, update, { returnDocument: 'after' });
-    if (result.value) {
-      delete result.value._id; // eslint-disable-next-line no-underscore-dangle
-      return result.value;
+    if (result) {
+      delete result._id; // eslint-disable-next-line no-underscore-dangle
+      return result;
     }
     return false;
   }
