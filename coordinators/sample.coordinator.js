@@ -24,9 +24,9 @@ export default class SamplesCoordinator {
     return SamplesModel.deleteSample(id);
   }
 
-  static async replaceSample(id, sample) {
+  static async replaceSample(id, sample, projectId) {
     console.log(`\t Coordinator : replaceSample(${id})`);
-    const replaceSample = { ...sample, id };
+    const replaceSample = { ...sample, id, projectId };
     return SamplesModel.replaceSample(id, replaceSample);
   }
 

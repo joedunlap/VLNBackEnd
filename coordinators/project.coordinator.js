@@ -45,7 +45,7 @@ export default class ProjectsCoordinator {
     console.log(`\t Coordinator : replaceProject(${id})`);
     const replaceProject = {
       ...project,
-      id,
+      id, 
     };
 
     const valid = validate(replaceProject);

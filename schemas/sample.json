@@ -4,10 +4,10 @@
     "title": "sample",
     "description": "A sample",
     "type": "object",
-    "required": ["id", "name"],
+    "required": ["id", "name", "projectId"],
     "properties": {
       "id": {
-        "description": "The unique id for this sample in NANOID format",
+        "description": "The unique id for this sample in uuid format",
         "type": "string",
         "format": "uuid"
       },
@@ -15,6 +15,12 @@
         "description": "The name of this sample",
         "type": "string",
         "minLength": 3
+      },
+      "projectId" : {
+        "description": "The projectId for this sample in uuid format",
+        "type": "string",
+        "format": "uuid"
+
       },
       "briefdescription": {
         "description": "brief description of this sample",
