@@ -22,7 +22,7 @@
         "format": "uuid"
 
       },
-      "briefdescription": {
+      "description": {
         "description": "brief description of this sample",
         "type": "string"
       },
