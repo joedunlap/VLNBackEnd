@@ -26,6 +26,14 @@
         "description": "brief description of this sample",
         "type": "string"
       },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "value": { "type": "string" },
+          "unit": { "type": "string" }
+        },
+        "required": ["value"]
+      },
       
     
       "tags": {
