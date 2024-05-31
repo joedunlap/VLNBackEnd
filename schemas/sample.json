@@ -26,14 +26,31 @@
         "description": "brief description of this sample",
         "type": "string"
       },
-      "additionalProperties": {
-        "type": "object",
-        "properties": {
-          "value": { "type": "string" },
-          "unit": { "type": "string" }
-        },
-        "required": ["value"]
+      "weight":{
+        "description": "weight of sample",
+        "type": "integer"
       },
+      "dilution":{
+        "description": "sample dilution",
+        "type":"string"
+      },
+      "assays": {
+        "description": "sample assay",
+        "type": "string"
+      },
+      "status":{
+        "description": "sample status",
+        "type": "string"
+      },
+      "volume": {
+        "description": "sample volume",
+        "type": "integer"
+      },
+      "treatment": {
+        "description": "sample treatment",
+        "type": "integer"
+      },
+
       
     
       "tags": {
