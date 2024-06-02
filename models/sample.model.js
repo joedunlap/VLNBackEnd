@@ -27,6 +27,12 @@ export default class SamplesModel {
     return db.dbSamples().deleteOne({ id });
   }
 
+  static async deleteSamplesByProjectId(projectId) {
+    console.log('\t\t Model : deleteSamplesByProjectId()');
+    const result = await db.dbSamples().deleteMany({ projectId });
+    return result.deletedCount;
+  }
+
   static async replaceSample(id, sample) {
     console.log('\t\t Model : replaceSample()');
     const result = await db.dbSamples().replaceOne({ id }, sample);

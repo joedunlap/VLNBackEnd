@@ -39,6 +39,11 @@ export default class SamplesCoordinator {
     return SamplesModel.deleteSample(id);
   }
 
+  static async deleteSamplesByProjectId(projectId) {
+    console.log(`\t Coordinator : deleteSamplesByProjectId(${projectId})`);
+    return SamplesModel.deleteSamplesByProjectId(projectId);
+  }
+
   static async replaceSample(id, sample) {
     console.log(`\t Coordinator : replaceSample(${id})`);
     const replaceSample = { ...sample, id };

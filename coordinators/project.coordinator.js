@@ -3,6 +3,7 @@ import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import ProjectsModel from '../models/project.model.js';
 import ProjectSchema from '../schemas/project.json' assert { type: 'json' };
+import SamplesCoordinator from './sample.coordinator.js';
 
 const ajv = new Ajv();
 addFormats(ajv);
@@ -36,8 +37,11 @@ export default class ProjectsCoordinator {
     return ProjectsModel.getProject(id);
   };
 
-  static deleteProject = (id) => {
+  static deleteProject = async (id) => {
     console.log(`\t Coordinator : deleteProject(${id})`);
+
+    //delete associated samples
+    await SamplesCoordinator.deleteSamplesByProjectId(id);
     return ProjectsModel.deleteProject(id);
   };
 
