@@ -20,7 +20,20 @@
         "description": "brief description of this project",
         "type": "string"
       },
-      
+      "category": {
+        "description":"category of project",
+        "type": "string"
+      },
+
+      "Group Affiliation": {
+        "description": "group/lab that the project is affiliated with",
+        "type": "string"
+      },
+
+      "Priority Level": {
+        "description": "priority level of project",
+        "type": "string"
+      },
     
       "tags": {
         "description": "Tags for this project for searching and categorization",

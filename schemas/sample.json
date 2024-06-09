@@ -51,6 +51,21 @@
         "type": "integer"
       },
 
+      "category": {
+        "description":"category of sample",
+        "type": "string"
+      },
+
+      "Group Affiliation": {
+        "description": "group/lab that the sample is affiliated with",
+        "type": "string"
+      },
+
+      "Priority Level": {
+        "description": "priority level of sample",
+        "type": "string"
+      },
+
       
     
       "tags": {
