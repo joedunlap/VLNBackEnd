@@ -9,8 +9,8 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 import { projectsData } from './test-data/projects-data.js';
 import errorMiddleware from '../../middleware/errorHandler.js';
 
-describe('Widgets', () => {
-  const url = 'http://127.0.0.1:3001/api/v1/widgets';
+describe('Projects', () => {
+  const url = 'http://127.0.0.1:3001/api/v1/Projects';
   let server;
   let mongod;
 
@@ -35,11 +35,11 @@ describe('Widgets', () => {
   });
 
   beforeEach(async () => {
-    await db.dbWidgets().insertMany(projectsData);
+    await db.dbProjects().insertMany(projectsData);
   });
 
   afterEach(async () => {
-    await db.dbWidgets().deleteMany({});
+    await db.dbProjects().deleteMany({});
   });
 
   after(async () => {
@@ -82,7 +82,7 @@ describe('Widgets', () => {
       expect(result).to.have.property('briefdescription');
       expect(result).to.have.property('category');
 
-      expect(result.name).to.equal('Project #1');
+      expect(result.name).to.equal('Project-Test');
       expect(result.briefdescription).to.equal('test');
       expect(result.category).to.equal('Other');
 
@@ -93,13 +93,14 @@ describe('Widgets', () => {
       expect(result).to.have.property('briefdescription');
       expect(result).to.have.property('category');
 
-      expect(result.name).to.equal('Project #1');
+      expect(result.name).to.equal('Project-Test');
       expect(result.briefdescription).to.equal('test');
       expect(result.category).to.equal('Other');
     });
 
     it('should update a single project by id', async () => {
       const updateData = {
+        id: '49b73c5f-9007-4828-a0cd-da38aacc1219',
         name: 'Project-UPDATED',
         briefdescription: 'Updated Test',
         category: 'Botany',
@@ -113,9 +114,9 @@ describe('Widgets', () => {
 
 
       expect(result.id).to.equal('49b73c5f-9007-4828-a0cd-da38aacc1219');
-      expect(result.name).to.equal('Project #1');
-      expect(result.briefdescription).to.equal('test');
-      expect(result.category).to.equal('Other');
+      expect(result.name).to.equal('Project-UPDATED');
+      expect(result.briefdescription).to.equal('Updated Test');
+      expect(result.category).to.equal('Botany');
 
       const getResult = (await axios.get(`${url}/49b73c5f-9007-4828-a0cd-da38aacc1219`)).data;
       expect(getResult).to.be.an('object');
@@ -125,9 +126,9 @@ describe('Widgets', () => {
       expect(result).to.have.property('category');
 
       expect(getResult.id).to.equal('49b73c5f-9007-4828-a0cd-da38aacc1219');
-      expect(result.name).to.equal('Project #1');
-      expect(result.briefdescription).to.equal('test');
-      expect(result.category).to.equal('Other');
+      expect(result.name).to.equal('Project-UPDATED');
+      expect(result.briefdescription).to.equal('Updated Test');
+      expect(result.category).to.equal('Botany');
     });
 
     it('should delete a single project by id', async () => {
@@ -145,6 +146,7 @@ describe('Widgets', () => {
       const updateData = {
         briefdescription: 'TEST TEST',
         category: 'Microbiology',
+        id: '49b73c5f-9007-4828-a0cd-da38aacc1219',
       };
 
       try {
