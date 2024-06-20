@@ -4,7 +4,7 @@ import config from 'config';
 import express from 'express';
 import { expect } from 'chai';
 import { db } from '../../lib/database.js';
-import widgetsRouter from '../../routes/widgets.routes.js';
+import projectRouter from '../../routes/project.routes.js';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import { projectsData } from './test-data/projects-data.js';
 import errorMiddleware from '../../middleware/errorHandler.js';
@@ -17,7 +17,7 @@ describe('Widgets', () => {
   before(async () => {
     const app = express();
     app.use(bodyParser.json());
-    app.use('/api/v1/widgets', widgetsRouter);
+    app.use('/api/v1/projects', projectRouter);
     app.use(errorMiddleware());
     server = app.listen(3001, () => {
       console.log(`Starting express application on port 3001 @ ${new Date().toISOString()}`);
@@ -35,7 +35,7 @@ describe('Widgets', () => {
   });
 
   beforeEach(async () => {
-    await db.dbWidgets().insertMany(widgetsData);
+    await db.dbWidgets().insertMany(projectsData);
   });
 
   afterEach(async () => {
@@ -48,89 +48,89 @@ describe('Widgets', () => {
     server.close();
   });
 
-  describe('getWidgets', () => {
-    it('should return an array of widgets', async () => {
+  describe('getProjects', () => {
+    it('should return an array of projects', async () => {
       const result = (await axios.get(url)).data;
       expect(result).to.be.an('array');
       expect(result).to.have.lengthOf(3);
     });
 
-    it('should a single widget by id', async () => {
+    it('should a single project by id', async () => {
       const result = (await axios.get(`${url}/49b73c5f-9007-4828-a0cd-da38aacc1219`)).data;
       expect(result).to.be.an('object');
       expect(result).to.have.property('id');
       expect(result).to.have.property('name');
-      expect(result).to.have.property('weight');
-      expect(result).to.have.property('color');
+      expect(result).to.have.property('briefdescription');
+      expect(result).to.have.property('category');
 
-      expect(result.name).to.equal('Widget #1');
-      expect(result.color).to.equal('blue');
-      expect(result.weight).to.equal(1);
+      expect(result.name).to.equal('Project #1');
+      expect(result.briefdescription).to.equal('test');
+      expect(result.category).to.equal('Other');
     });
 
-    it('should create a new widget', async () => {
-      const newWidget = {
-        name: 'Widget-Test',
-        weight: 10,
-        color: 'blue',
+    it('should create a new project', async () => {
+      const newProject = {
+        name: 'Project-Test',
+        briefdescription: 'test',
+        category: 'Other',
       };
 
-      const result = (await axios.post(url, newWidget)).data;
+      const result = (await axios.post(url, newProject)).data;
       expect(result).to.be.an('object');
       expect(result).to.have.property('id');
       expect(result).to.have.property('name');
-      expect(result).to.have.property('weight');
-      expect(result).to.have.property('color');
+      expect(result).to.have.property('briefdescription');
+      expect(result).to.have.property('category');
 
-      expect(result.name).to.equal('Widget-Test');
-      expect(result.color).to.equal('blue');
-      expect(result.weight).to.equal(10);
+      expect(result.name).to.equal('Project #1');
+      expect(result.briefdescription).to.equal('test');
+      expect(result.category).to.equal('Other');
 
       const getResult = (await axios.get(`${url}/${result.id}`)).data;
       expect(getResult).to.be.an('object');
       expect(getResult).to.have.property('id');
       expect(getResult).to.have.property('name');
-      expect(getResult).to.have.property('weight');
-      expect(getResult).to.have.property('color');
+      expect(result).to.have.property('briefdescription');
+      expect(result).to.have.property('category');
 
-      expect(getResult.id).to.equal(result.id);
-      expect(getResult.name).to.equal('Widget-Test');
-      expect(getResult.color).to.equal('blue');
-      expect(getResult.weight).to.equal(10);
+      expect(result.name).to.equal('Project #1');
+      expect(result.briefdescription).to.equal('test');
+      expect(result.category).to.equal('Other');
     });
 
-    it('should update a single widget by id', async () => {
+    it('should update a single project by id', async () => {
       const updateData = {
-        name: 'Widget-UPDATED',
-        color: 'red',
-        weight: 20,
+        name: 'Project-UPDATED',
+        briefdescription: 'Updated Test',
+        category: 'Botany',
       };
       const result = (await axios.patch(`${url}/49b73c5f-9007-4828-a0cd-da38aacc1219`, updateData)).data;
       expect(result).to.be.an('object');
       expect(result).to.have.property('id');
       expect(result).to.have.property('name');
-      expect(result).to.have.property('weight');
-      expect(result).to.have.property('color');
+      expect(result).to.have.property('briefdescription');
+      expect(result).to.have.property('category');
+
 
       expect(result.id).to.equal('49b73c5f-9007-4828-a0cd-da38aacc1219');
-      expect(result.name).to.equal('Widget-UPDATED');
-      expect(result.color).to.equal('red');
-      expect(result.weight).to.equal(20);
+      expect(result.name).to.equal('Project #1');
+      expect(result.briefdescription).to.equal('test');
+      expect(result.category).to.equal('Other');
 
       const getResult = (await axios.get(`${url}/49b73c5f-9007-4828-a0cd-da38aacc1219`)).data;
       expect(getResult).to.be.an('object');
       expect(getResult).to.have.property('id');
       expect(getResult).to.have.property('name');
-      expect(getResult).to.have.property('weight');
-      expect(getResult).to.have.property('color');
+      expect(result).to.have.property('briefdescription');
+      expect(result).to.have.property('category');
 
       expect(getResult.id).to.equal('49b73c5f-9007-4828-a0cd-da38aacc1219');
-      expect(getResult.name).to.equal('Widget-UPDATED');
-      expect(getResult.color).to.equal('red');
-      expect(getResult.weight).to.equal(20);
+      expect(result.name).to.equal('Project #1');
+      expect(result.briefdescription).to.equal('test');
+      expect(result.category).to.equal('Other');
     });
 
-    it('should delete a single widget by id', async () => {
+    it('should delete a single project by id', async () => {
       const result = (await axios.delete(`${url}/49b73c5f-9007-4828-a0cd-da38aacc1219`));
       expect(result.status).to.equal(204);
 
@@ -141,10 +141,10 @@ describe('Widgets', () => {
       }
     });
 
-    it('should fail validation when updating a single widget by id', async () => {
+    it('should fail validation when updating a single project by id', async () => {
       const updateData = {
-        color: 'purple',
-        weight: 20,
+        briefdescription: 'TEST TEST',
+        category: 'Microbiology',
       };
 
       try {
