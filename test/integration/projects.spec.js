@@ -10,7 +10,7 @@ import { projectsData } from './test-data/projects-data.js';
 import errorMiddleware from '../../middleware/errorHandler.js';
 
 describe('Projects', () => {
-  const url = 'http://127.0.0.1:3001/api/v1/Projects';
+  const url = 'http://127.0.0.1:3001/api/v1/projects';
   let server;
   let mongod;
 
