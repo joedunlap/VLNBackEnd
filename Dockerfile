@@ -21,6 +21,12 @@ RUN npm install
 # Copy the rest of the application
 COPY . .
 
+# Copy the environment variables file
+COPY env/.env.production .env
+
+# Set NODE_ENV environment variable
+ENV NODE_ENV=production
+
 # Expose the port your app runs on
 EXPOSE 3000
 

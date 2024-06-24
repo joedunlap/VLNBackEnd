@@ -1,6 +1,4 @@
-/* eslint-disable import/extensions */
 import dotenv from 'dotenv';
-import config from 'config';
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
@@ -9,6 +7,7 @@ import projectRouter from './routes/project.routes.js';
 import sampleRouter from './routes/sample.routes.js';
 import { db } from './lib/database.js';
 
+// Load environment variables
 dotenv.config({ path: `.env.${process.env.NODE_ENV || 'development'}` });
 
 const { json } = bodyParser;
@@ -29,13 +28,15 @@ app.use('/api/v1/samples', sampleRouter);
 // Error middleware MUST be last
 app.use(errorMiddleware);
 
-// TODO: Environment based configs
+// Environment based configs
 const mongoConfig = {
-  url: process.env.MONGO_URL || config.get('mongo.url'),
-  database: process.env.MONGO_DB || config.get('mongo.database'),
-  minPoolSize: parseInt(process.env.MONGO_MIN_POOL_SIZE, 10) || config.get('mongo.minPoolSize'),
-  maxPoolSize: parseInt(process.env.MONGO_MAX_POOL_SIZE, 10) || config.get('mongo.maxPoolSize')
+  url: process.env.MONGO_URL,
+  database: process.env.MONGO_DB,
+  minPoolSize: parseInt(process.env.MONGO_MIN_POOL_SIZE, 10),
+  maxPoolSize: parseInt(process.env.MONGO_MAX_POOL_SIZE, 10)
 };
+
+console.log('Database configuration:', mongoConfig);
 
 db.init(mongoConfig)
   .then(() => {

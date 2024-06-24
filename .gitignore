@@ -139,3 +139,5 @@ dist
 .env.development
 .env.test
 .env.production
+
+production.json
